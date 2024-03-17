@@ -1,14 +1,17 @@
 version: "3.7"
 services:
   adguard:
-    image: adguard/adguardhome:v0.107.45
+    image: adguard/adguardhome
     container_name: adguard
+    depends_on: [unbound]
     volumes:
       - "${APP_DATA_DIR}/data/work:/opt/adguardhome/work"
       - "${APP_DATA_DIR}/data/conf:/opt/adguardhome/conf"
     restart: unless-stopped
     networks:
-      - tipi_main_network
+      private_network:
+        ipv4_address: 10.2.0.100
+      tipi_main_network:
     ports:
       - ${NETWORK_INTERFACE:-0.0.0.0}:53:53/tcp
       - ${NETWORK_INTERFACE:-0.0.0.0}:53:53/udp
@@ -40,3 +43,21 @@ services:
       traefik.http.routers.adguard-local.entrypoints: websecure
       traefik.http.routers.adguard-local.service: adguard
       traefik.http.routers.adguard-local.tls: true
+
+  unbound:
+    image: "mvance/unbound-rpi:latest"
+    container_name: unbound
+    restart: unless-stopped
+    hostname: "unbound"
+    volumes:
+      - "${APP_DATA_DIR}/data/unbound:/opt/unbound/etc/unbound/"
+    networks:
+      private_network:
+        ipv4_address: 10.2.0.200
+
+networks:
+  private_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.2.0.0/24

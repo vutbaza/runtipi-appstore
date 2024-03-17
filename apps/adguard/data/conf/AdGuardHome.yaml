@@ -6,7 +6,7 @@ http:
   session_ttl: 720h
 users:
   - name: admin
-    password: $2y$10$hwNxW8A5mAJfTkeBozRlm.So/MAzLfc2FzYDdlxuo99AwFt5pTLBK
+    password: $2y$10$G7Qu8Y3szepMfaRUyQ.FmuKR.n4U9dHOQm.GgrIMuYC9UP8vmHJri
 auth_attempts: 5
 block_auth_min: 15
 http_proxy: ""
@@ -18,8 +18,6 @@ dns:
   port: 53
   anonymize_client_ip: false
   ratelimit: 20
-  ratelimit_subnet_len_ipv4: 24
-  ratelimit_subnet_len_ipv6: 56
   ratelimit_whitelist: []
   refuse_any: true
   upstream_dns:
@@ -31,7 +29,8 @@ dns:
   fallback_dns:
     - https://dns.quad9.net/dns-query
     - quic://unfiltered.adguard-dns.com
-  upstream_mode: load_balance
+  all_servers: false
+  fastest_addr: false
   fastest_timeout: 1s
   allowed_clients: []
   disallowed_clients: []
@@ -67,79 +66,18 @@ dns:
   dns64_prefixes: []
   serve_http3: false
   use_http3_upstreams: false
-  serve_plain_dns: true
 tls:
-  enabled: true
-  server_name: adguard.avelohell.shop
-  force_https: true
+  enabled: false
+  server_name: ""
+  force_https: false
   port_https: 443
   port_dns_over_tls: 853
   port_dns_over_quic: 853
   port_dnscrypt: 0
   dnscrypt_config_file: ""
   allow_unencrypted_doh: false
-  certificate_chain: |-
-    -----BEGIN CERTIFICATE-----
-    MIIELzCCAxegAwIBAgISBIdKJT9svtICrjMe0Y+ltT6VMA0GCSqGSIb3DQEBCwUA
-    MDIxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MQswCQYDVQQD
-    EwJSMzAeFw0yNDAzMTUxMDA4NDhaFw0yNDA2MTMxMDA4NDdaMCExHzAdBgNVBAMT
-    FmFkZ3VhcmQuYXZlbG9oZWxsLnNob3AwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNC
-    AAT2MvrcO7AcwSBOm1rme/mVQ7LncRa5oKC12i9PrXX9qJPcF8r1KIkwI4nzNAx9
-    5ZK0RLkKgQW5M3T+4QZ4LOW7o4ICGTCCAhUwDgYDVR0PAQH/BAQDAgeAMB0GA1Ud
-    JQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjAMBgNVHRMBAf8EAjAAMB0GA1UdDgQW
-    BBT7jqupDClHQQgVXl1B6+O7MTlsGjAfBgNVHSMEGDAWgBQULrMXt1hWy65QCUDm
-    H6+dixTCxjBVBggrBgEFBQcBAQRJMEcwIQYIKwYBBQUHMAGGFWh0dHA6Ly9yMy5v
-    LmxlbmNyLm9yZzAiBggrBgEFBQcwAoYWaHR0cDovL3IzLmkubGVuY3Iub3JnLzAh
-    BgNVHREEGjAYghZhZGd1YXJkLmF2ZWxvaGVsbC5zaG9wMBMGA1UdIAQMMAowCAYG
-    Z4EMAQIBMIIBBQYKKwYBBAHWeQIEAgSB9gSB8wDxAHcAO1N3dT4tuYBOizBbBv5A
-    O2fYT8P0x70ADS1yb+H61BcAAAGOQczcDgAABAMASDBGAiEA1w/b4XhhhyqPRCs/
-    wxI3BpOUMo+Hh+T3QVygZXUylPYCIQCkZYWHxifqCGaaTV4yIBZfuICNlHlpyT76
-    0itMCA3k1AB2AO7N0GTV2xrOxVy3nbTNE6Iyh0Z8vOzew1FIWUZxH7WbAAABjkHM
-    3gEAAAQDAEcwRQIgZMf520v9MbOhQQQ/0rtbi9GxDNO2iC2z+32pwP1DvcwCIQCE
-    ipkL/8LAsNX42px2mVPwsu2R5S4NQ8sVkv5T/NR5LTANBgkqhkiG9w0BAQsFAAOC
-    AQEAEyxPC/ODTGVc9RltLVm0ZS0+TTqZO9KMFgS6aG7GLKaBKk43Gj2stQIJSw84
-    lWhRx3yw0DixzXYwhVt0eiBqJn5lV7ac5BGQHduSIi28Uev/Xszk45pfvsqvWCwB
-    e2kOcGHEwinJ81CTIAq/k50K1Vdi1VBlBA9Q19BwVuQuhR0KS6m5ugmZgv+win/U
-    H9Lp7xNFpcmNIBS0Hb3is9E1FGBSYND2dC1AzW3eTRAI3HJju2a/3ZkJzTXrWRIm
-    9Vuda7Nvz2zuFTO06HVAWsF6L3vTuV7BVAoGPTerl7omV5vhAzHb8DQsPLSOY5J2
-    AATRMr+65SaCh5iWAoYtOYlwlQ==
-    -----END CERTIFICATE-----
-    -----BEGIN CERTIFICATE-----
-    MIIFFjCCAv6gAwIBAgIRAJErCErPDBinU/bWLiWnX1owDQYJKoZIhvcNAQELBQAw
-    TzELMAkGA1UEBhMCVVMxKTAnBgNVBAoTIEludGVybmV0IFNlY3VyaXR5IFJlc2Vh
-    cmNoIEdyb3VwMRUwEwYDVQQDEwxJU1JHIFJvb3QgWDEwHhcNMjAwOTA0MDAwMDAw
-    WhcNMjUwOTE1MTYwMDAwWjAyMQswCQYDVQQGEwJVUzEWMBQGA1UEChMNTGV0J3Mg
-    RW5jcnlwdDELMAkGA1UEAxMCUjMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK
-    AoIBAQC7AhUozPaglNMPEuyNVZLD+ILxmaZ6QoinXSaqtSu5xUyxr45r+XXIo9cP
-    R5QUVTVXjJ6oojkZ9YI8QqlObvU7wy7bjcCwXPNZOOftz2nwWgsbvsCUJCWH+jdx
-    sxPnHKzhm+/b5DtFUkWWqcFTzjTIUu61ru2P3mBw4qVUq7ZtDpelQDRrK9O8Zutm
-    NHz6a4uPVymZ+DAXXbpyb/uBxa3Shlg9F8fnCbvxK/eG3MHacV3URuPMrSXBiLxg
-    Z3Vms/EY96Jc5lP/Ooi2R6X/ExjqmAl3P51T+c8B5fWmcBcUr2Ok/5mzk53cU6cG
-    /kiFHaFpriV1uxPMUgP17VGhi9sVAgMBAAGjggEIMIIBBDAOBgNVHQ8BAf8EBAMC
-    AYYwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMBIGA1UdEwEB/wQIMAYB
-    Af8CAQAwHQYDVR0OBBYEFBQusxe3WFbLrlAJQOYfr52LFMLGMB8GA1UdIwQYMBaA
-    FHm0WeZ7tuXkAXOACIjIGlj26ZtuMDIGCCsGAQUFBwEBBCYwJDAiBggrBgEFBQcw
-    AoYWaHR0cDovL3gxLmkubGVuY3Iub3JnLzAnBgNVHR8EIDAeMBygGqAYhhZodHRw
-    Oi8veDEuYy5sZW5jci5vcmcvMCIGA1UdIAQbMBkwCAYGZ4EMAQIBMA0GCysGAQQB
-    gt8TAQEBMA0GCSqGSIb3DQEBCwUAA4ICAQCFyk5HPqP3hUSFvNVneLKYY611TR6W
-    PTNlclQtgaDqw+34IL9fzLdwALduO/ZelN7kIJ+m74uyA+eitRY8kc607TkC53wl
-    ikfmZW4/RvTZ8M6UK+5UzhK8jCdLuMGYL6KvzXGRSgi3yLgjewQtCPkIVz6D2QQz
-    CkcheAmCJ8MqyJu5zlzyZMjAvnnAT45tRAxekrsu94sQ4egdRCnbWSDtY7kh+BIm
-    lJNXoB1lBMEKIq4QDUOXoRgffuDghje1WrG9ML+Hbisq/yFOGwXD9RiX8F6sw6W4
-    avAuvDszue5L3sz85K+EC4Y/wFVDNvZo4TYXao6Z0f+lQKc0t8DQYzk1OXVu8rp2
-    yJMC6alLbBfODALZvYH7n7do1AZls4I9d1P4jnkDrQoxB3UqQ9hVl3LEKQ73xF1O
-    yK5GhDDX8oVfGKF5u+decIsH4YaTw7mP3GFxJSqv3+0lUFJoi5Lc5da149p90Ids
-    hCExroL1+7mryIkXPeFM5TgO9r0rvZaBFOvV2z0gp35Z0+L4WPlbuEjN/lxPFin+
-    HlUjr8gRsI3qfJOQFy/9rKIJR0Y/8Omwt/8oTWgy1mdeHmmjk7j1nYsvC9JSQ6Zv
-    MldlTTKB3zhThV1+XWYp6rjd5JW1zbVWEkLNxE7GJThEUG3szgBVGP7pSWTUTsqX
-    nLRbwHOoq7hHwg==
-    -----END CERTIFICATE-----
-  private_key: |-
-    -----BEGIN PRIVATE KEY-----
-    MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgKo5HiRnKYLBtyxKy
-    /5PEHkwpqOK5dGNiQXmz9oyI4iOhRANCAAT2MvrcO7AcwSBOm1rme/mVQ7LncRa5
-    oKC12i9PrXX9qJPcF8r1KIkwI4nzNAx95ZK0RLkKgQW5M3T+4QZ4LOW7
-    -----END PRIVATE KEY-----
+  certificate_chain: ""
+  private_key: ""
   certificate_path: ""
   private_key_path: ""
   strict_sni_check: false
@@ -154,66 +92,38 @@ statistics:
   interval: 24h
   enabled: true
 filters:
-  - enabled: true
-    url: https://small.oisd.nl
-    name: OISD Blocklist small
-    id: 1708266375
-  - enabled: true
-    url: https://raw.githubusercontent.com/Iz-zzzzz/IzFilter-Public/main/Iz's%20Addon%20Filter%20Public%20Github.txt
-    name: Iz-zzzzz / IzFilter-Public
-    id: 1708686280
-  - enabled: true
-    url: https://easylist.to/easylist/easylist.txt
-    name: Easylist
-    id: 1708686281
-  - enabled: true
-    url: https://secure.fanboy.co.nz/fanboy-cookiemonster.txt
-    name: Easylist cookielist
-    id: 1708686282
-  - enabled: true
-    url: https://easylist.to/easylist/easyprivacy.txt
-    name: Easyprivacy
-    id: 1708686283
-  - enabled: true
-    url: https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_11_Mobile/filter.txt
-    name: Adguard mobile ads
-    id: 1708686285
-  - enabled: true
-    url: https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_17_TrackParam/filter.txt
-    name: Adguard Url tracking protect
-    id: 1708686286
-  - enabled: true
-    url: https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_3_Spyware/filter.txt
-    name: Adguard tracking protect
-    id: 1708686287
-  - enabled: true
-    url: https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_18_Annoyances_Cookies/filter.txt
-    name: Adguard cookie notice
-    id: 1708686288
-  - enabled: true
-    url: https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt
-    name: Adguard base filter
-    id: 1708686289
-  - enabled: true
+  - enabled: false
     url: https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
     name: AdGuard DNS filter
-    id: 1708686290
+    id: 1
+  - enabled: false
+    url: https://adaway.org/hosts.txt
+    name: AdAway Default Blocklist
+    id: 2
+  - enabled: false
+    url: https://easylist-downloads.adblockplus.org/advblock.txt
+    name: RuAdlist
+    id: 1670584470
+  - enabled: false
+    url: https://easylist-downloads.adblockplus.org/bitblock.txt
+    name: BitBlock
+    id: 1670584471
+  - enabled: false
+    url: https://easylist-downloads.adblockplus.org/cntblock.txt
+    name: cntblock
+    id: 1670584472
+  - enabled: false
+    url: https://easylist-downloads.adblockplus.org/easylist.txt
+    name: easyList
+    id: 1670584473
+  - enabled: false
+    url: https://schakal.ru/hosts/alive_hosts_ru_com.txt
+    name: то же без неотвечающих хостов и доменов вне зон RU, NET и COM
+    id: 1677533164
   - enabled: true
-    url: https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
-    name: StevenBlack / hosts
-    id: 1708933813
-  - enabled: true
-    url: https://raw.githubusercontent.com/ttc-cert/TTC-CERT_blocklist_recommended/master/domain_blocklist_recommended.txt
-    name: TTC-CERT_domain
-    id: 1708933814
-  - enabled: true
-    url: https://raw.githubusercontent.com/ttc-cert/TTC-CERT_blocklist_recommended/master/domain_from_android_rat_blocklist_recommended.txt
-    name: TTC-CERT_android
-    id: 1708933815
-  - enabled: true
-    url: https://raw.githubusercontent.com/ttc-cert/TTC-CERT_blocklist_recommended/master/url_blocklist_recommended.txt
-    name: TTC-CERT_url
-    id: 1708933816
+    url: https://schakal.ru/hosts/hosts_mail_fb.txt
+    name: файл с разблокированными r.mail.ru и graph.facebook.com
+    id: 1677533165
 whitelist_filters: []
 user_rules: []
 dhcp:
@@ -270,231 +180,7 @@ clients:
     rdns: true
     dhcp: true
     hosts: true
-  persistent:
-    - safe_search:
-        enabled: false
-        bing: true
-        duckduckgo: true
-        google: true
-        pixabay: true
-        yandex: true
-        youtube: true
-      blocked_services:
-        schedule:
-          time_zone: Asia/Bangkok
-        ids: []
-      name: AirXiaomi
-      ids:
-        - 192.168.1.33
-      tags:
-        - device_other
-      upstreams: []
-      uid: 018e4291-45f2-78dc-b17f-79651f9604c0
-      upstreams_cache_size: 0
-      upstreams_cache_enabled: false
-      use_global_settings: true
-      filtering_enabled: false
-      parental_enabled: false
-      safebrowsing_enabled: false
-      use_global_blocked_services: true
-      ignore_querylog: false
-      ignore_statistics: false
-    - safe_search:
-        enabled: false
-        bing: true
-        duckduckgo: true
-        google: true
-        pixabay: true
-        yandex: true
-        youtube: true
-      blocked_services:
-        schedule:
-          time_zone: Asia/Bangkok
-        ids: []
-      name: Armbian
-      ids:
-        - 192.168.1.40
-      tags:
-        - os_linux
-      upstreams: []
-      uid: 018e4290-d2d2-73c3-a2ed-51996cb92644
-      upstreams_cache_size: 0
-      upstreams_cache_enabled: false
-      use_global_settings: true
-      filtering_enabled: false
-      parental_enabled: false
-      safebrowsing_enabled: false
-      use_global_blocked_services: true
-      ignore_querylog: false
-      ignore_statistics: false
-    - safe_search:
-        enabled: false
-        bing: true
-        duckduckgo: true
-        google: true
-        pixabay: true
-        yandex: true
-        youtube: true
-      blocked_services:
-        schedule:
-          time_zone: Asia/Bangkok
-        ids: []
-      name: IPhoneFern
-      ids:
-        - 192.168.1.36
-      tags:
-        - device_phone
-      upstreams: []
-      uid: 018e429b-f071-7597-b09c-fcc2c6bbc86f
-      upstreams_cache_size: 0
-      upstreams_cache_enabled: false
-      use_global_settings: true
-      filtering_enabled: false
-      parental_enabled: false
-      safebrowsing_enabled: false
-      use_global_blocked_services: true
-      ignore_querylog: false
-      ignore_statistics: false
-    - safe_search:
-        enabled: false
-        bing: true
-        duckduckgo: true
-        google: true
-        pixabay: true
-        yandex: true
-        youtube: true
-      blocked_services:
-        schedule:
-          time_zone: Asia/Bangkok
-        ids: []
-      name: IphoneVut
-      ids:
-        - 192.168.1.37
-      tags:
-        - device_phone
-      upstreams: []
-      uid: 018e4293-7f3f-767c-927a-c70f9a86ad5d
-      upstreams_cache_size: 0
-      upstreams_cache_enabled: false
-      use_global_settings: true
-      filtering_enabled: false
-      parental_enabled: false
-      safebrowsing_enabled: false
-      use_global_blocked_services: true
-      ignore_querylog: false
-      ignore_statistics: false
-    - safe_search:
-        enabled: false
-        bing: true
-        duckduckgo: true
-        google: true
-        pixabay: true
-        yandex: true
-        youtube: true
-      blocked_services:
-        schedule:
-          time_zone: Asia/Bangkok
-        ids: []
-      name: PC-Desktop
-      ids:
-        - 192.168.1.38
-      tags:
-        - device_pc
-      upstreams: []
-      uid: 018e4290-4ce8-717f-9723-1b2c750fd35f
-      upstreams_cache_size: 0
-      upstreams_cache_enabled: false
-      use_global_settings: true
-      filtering_enabled: false
-      parental_enabled: false
-      safebrowsing_enabled: false
-      use_global_blocked_services: true
-      ignore_querylog: false
-      ignore_statistics: false
-    - safe_search:
-        enabled: false
-        bing: true
-        duckduckgo: true
-        google: true
-        pixabay: true
-        yandex: true
-        youtube: true
-      blocked_services:
-        schedule:
-          time_zone: Asia/Bangkok
-        ids: []
-      name: TrueBox
-      ids:
-        - 192.168.1.39
-      tags:
-        - device_tv
-      upstreams: []
-      uid: 018e4291-a6bd-7cbd-9f5e-e88fd3603354
-      upstreams_cache_size: 0
-      upstreams_cache_enabled: false
-      use_global_settings: true
-      filtering_enabled: false
-      parental_enabled: false
-      safebrowsing_enabled: false
-      use_global_blocked_services: true
-      ignore_querylog: false
-      ignore_statistics: false
-    - safe_search:
-        enabled: false
-        bing: true
-        duckduckgo: true
-        google: true
-        pixabay: true
-        yandex: true
-        youtube: true
-      blocked_services:
-        schedule:
-          time_zone: Asia/Bangkok
-        ids: []
-      name: VPN-Bittorrent
-      ids:
-        - 10.2.0.3
-      tags:
-        - user_regular
-      upstreams: []
-      uid: 018e4295-56aa-7605-9967-821c30906c61
-      upstreams_cache_size: 0
-      upstreams_cache_enabled: false
-      use_global_settings: true
-      filtering_enabled: false
-      parental_enabled: false
-      safebrowsing_enabled: false
-      use_global_blocked_services: true
-      ignore_querylog: false
-      ignore_statistics: false
-    - safe_search:
-        enabled: false
-        bing: true
-        duckduckgo: true
-        google: true
-        pixabay: true
-        yandex: true
-        youtube: true
-      blocked_services:
-        schedule:
-          time_zone: Asia/Bangkok
-        ids: []
-      name: VPN-PhoneVut
-      ids:
-        - 10.2.0.1
-      tags:
-        - device_phone
-      upstreams: []
-      uid: 018e4294-c1fa-7393-8e72-12528acda38f
-      upstreams_cache_size: 0
-      upstreams_cache_enabled: false
-      use_global_settings: true
-      filtering_enabled: false
-      parental_enabled: false
-      safebrowsing_enabled: false
-      use_global_blocked_services: true
-      ignore_querylog: false
-      ignore_statistics: false
+  persistent: []
 log:
   file: ""
   max_backups: 0
@@ -507,4 +193,4 @@ os:
   group: ""
   user: ""
   rlimit_nofile: 0
-schema_version: 28
+schema_version: 27  
